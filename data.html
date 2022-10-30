@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+	Based on HTML template by TEMPLATED, http://templated.co
+	Released for free under the Creative Commons Attribution License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>Chapman & Rodden: The Definitive Guide to Quantitative User Experience Research</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="default.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    
+<div id="outer">
+    
+	<div id="header">
+		<h1><a href="index.html">The Definitive Guide to Quantitative User Experience Research</a></h1>
+		<h2></h2>
+	</div>
+    
+	<div id="menu">
+		<ul>
+			<li><a href="code.html" accesskey="1" title="">Code</a></li>
+			<li><a href="data.html" accesskey="2" title="data">Data</a></li>
+<!--
+            <li><a href="exercises/index.html" accesskey="3" title="">Exercises</a></li>
+            <li><a href="Instructor/slides-index.html" accesskey="4" title="">Classroom</a></li>
+-->
+			<li><a href="about.html" accesskey="5" title="">About</a></li>
+            <li><a href="faq.html" accesskey="6" title="">FAQ</a></li>
+            <li><a href="errata.html" accesskey="7" title="">Errata</a></li>
+		</ul>
+	</div>
+    
+	<div id="content">
+		<div id="primaryContentContainer">
+			<div id="primaryContent">
+                
+				<h2>Data Files</h2>
+
+                <p>All data files in the book are simulated data, except for two public web site logs in Chapter 9. This is because few industry data sets are publicly available. Note that <strong>no proprietary data from Amazon, Code for America, Google, Microsoft, Observable or other affiliations of the authors</strong> was used in this book.</p>
+                
+                <p>Data for each chapter can be downloaded on demand using the commands in the book. Alternatively, to work offline you could download the files separately -- either individually as .CSV files or all at once in a single .ZIP.</p>
+                
+                <h2>Data Access Methods</h2>
+                <ul>
+                    <li>Download with short URLs as noted in the book, such as <code>read.csv("TBD")</code>.</li>
+					<li><strong>Alternative for offline access, individual chapters</strong>: choose from the <a href="data/">folder of all data files</a>. Right click and save the CSV file to a desired folder; then use <code>setwd()</code> to set your R working directory and <code>read.csv()</code> to access the data.</li>
+					<li><strong>Alternative for offline access, all chapters</strong>: get the <a href="code/ChapmanRodden-CodeAndData.zip">single ZIP file of all code and data</a> (<strong>warning:</strong> downloads immediately). Unzip it and follow the instructions above for single files.</li>
+                    
+				</ul>
+               
+				<h3>Example Code Using a Downloaded CSV File</h3>
+                Assuming you have downloaded <code>csat-data.csv</code> to the <code>/users/chris</code> folder:
+                <pre><code>
+> setwd("/users/chris")
+> csat.data <- read.csv("csat-data.csv")
+> summary(csat.data)
+     Date               Rating        Country         
+ Length:36048       Min.   :1.000   Length:36048      
+ Class :character   1st Qu.:4.000   Class :character  
+ Mode  :character   Median :4.000   Mode  :character  
+                    Mean   :4.051                     
+                    3rd Qu.:5.000                     
+                    Max.   :5.000                     
+                </code></pre>
+                
+			</div>
+		</div>
+        
+		<div class="clear"></div>
+	</div>
+    
+	<div id="footer">
+		<p>Copyright &copy; 2022, Chris Chapman and Kerry Rodden. Design based on <a href="license-rational-template.txt">Rational template</a>, used under Creative Commons Attribution License.</p>
+	</div>
+    
+</div>
+    
+</body>
+</html>
