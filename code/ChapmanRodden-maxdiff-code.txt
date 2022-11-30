@@ -52,6 +52,7 @@ if (length(needed.packages) > 0) {
   install.packages(needed.packages)
 }
 # install the experimental choicetools package from GitHub
+# will only install if it doesn't exist or is out of date
 devtools::install_github("cnchapman/choicetools")
 
 
@@ -60,8 +61,19 @@ devtools::install_github("cnchapman/choicetools")
 # load choicetools package to work with Qualtrics MaxDiff format data
 library(choicetools)
 
+# get the pizza data file and save it locally
+# change the folder destination if needed
+# NOTE: requires live internet access to the book's website
+# alternative: download all data sets separately, and skip this step
+if (!file.exists("qualtrics-pizza-maxdiff.csv")) {
+  download.file(url = "https://bit.ly/3FvVoNE",
+                destfile = "qualtrics-pizza-maxdiff.csv",
+                method="auto")
+}
+
 # set up the study object
-md.define <- parse.md.qualtrics('data/qualtrics-pizza-maxdiff.csv',
+# change the data file location if needed for your system
+md.define <- parse.md.qualtrics("qualtrics-pizza-maxdiff.csv",
                                 returnList=TRUE)
 # load the data
 md.define$md.block <- read.md.qualtrics(md.define)$md.block
@@ -91,22 +103,37 @@ plot.md.indiv(md.define) +                       # create plot of HB model with 
 names(md.define$md.hb.betas)
 pizza.util <- md.define$md.hb.betas[ , c("Margherita", "Mushroom", "Arrabbiata",
                                          "Pepperoni", "Arugula", "Marinara")]
+# average utility values
 colMeans(pizza.util)
+# exponentiated values that can be summed for aggregate "demand"
 exp(colMeans(pizza.util))
+# the preference share of each pizza, in percentage of the total demand in the set
+# note rounding errors that make it appear to sum to 98 instead of 100 (try round(... , 2))
 round(100 * exp(colMeans(pizza.util)) / sum(exp(colMeans(pizza.util))))
+
 
 ### EXAMPLE TWO: SIMULATED INFORMATION USAGE DATA
 
 # set up structure by parsing and interpreting the Qualtrics CSV
 library(choicetools)
 
+# get the use case example data
+# change the folder destination if needed
+# NOTE: requires live internet access to the book's website
+# alternative: download all data sets separately, and skip this step
+if (!file.exists("qualtrics-maxdiff-usecases.csv")) {
+  download.file(url = "https://bit.ly/3SRnq9l",
+                destfile = "qualtrics-maxdiff-usecases.csv",
+                method="auto")
+}
+
 # check the structure
 # change the file location to match your system as needed
-parse.md.qualtrics("data/qualtrics-maxdiff-usecases.csv")
+parse.md.qualtrics("qualtrics-maxdiff-usecases.csv")
 
 # set up the study object md.define
 # change the file location to match your system as needed
-md.define <- parse.md.qualtrics("data/qualtrics-maxdiff-usecases.csv",
+md.define <- parse.md.qualtrics("qualtrics-maxdiff-usecases.csv",
                                 returnList = TRUE)
 
 # read the data (can be slow for large data sets)
@@ -114,12 +141,18 @@ md.define$md.block <- read.md.qualtrics(md.define)$md.block
 
 # check some data
 head(md.define$md.block)
+# quick plot of the counts
+plot.md.counts(md.define)
 
+### START: this block not in the book
 # try the md.quicklogit() function for a quick check
 # note that one reference item is omitted in a traditional logit model
+# NOTE: this is omitted from the book, as it mostly duplicates the check from
+# a counts plot
 md.define$md.model.logit <- md.quicklogit(md.define)
 # plot it
 md.plot.logit(md.define)
+### END: not in the book
 
 # estimate the HB model
 # note: slow. estimation takes about 4 minutes on Chris's laptop
@@ -169,8 +202,9 @@ plot.md.indiv(md.define) +                # distribution of individuals
 ######################
 # EXTRA CODE
 ######################
-# Following code is not covered in the book
+# Following code is NOT covered in the book
 # but may be relevant if you wish to do one of these tasks:
+#
 # 1. Simulate different data for your own testing purposes
 # 2. Inspect the Qualtrics data format to translate some other data
 # 3. Create new Qualtrics data headers to match a data set
@@ -180,9 +214,12 @@ plot.md.indiv(md.define) +                # distribution of individuals
 # although it was used to create the "information seeking" data set
 # in the book.
 #
+# BEWARE that there are a few "magic numbers" here and there, due t
+# the author's laziness :)
+#
 
 # CREATE SIMULATED INFORMATION TASK DATA SET
-# this the data set used in "Example 2" above
+# this is the data set used in "Example 2" above
 #
 # these are the items whose responses we'll simulate
 online.tasks <- c(
@@ -225,6 +262,9 @@ Sys.time()
 #
 # this function will return part worths for one respondent
 # assigned one of the 4 groups
+#
+# this is of no general value; we just do this to create "segments" in
+# response style who have somewhat different sets of preferences
 #
 one.util <- function(tasks, group) {
   # define task mapping for each group
@@ -277,7 +317,7 @@ summary(util.df)
 # check zero-sum within individuals
 head(md.des$versions.design, 20)
 head(util.df)
-item.cols <- 2:20
+item.cols <- 2:20  # <<<<< Magic numbers that only match the items defined above
 summary(rowSums(util.df[ , item.cols]))
 # check overall average pws
 colMeans(util.df[ , item.cols])
@@ -356,10 +396,17 @@ md.ests
 # how well does the "count" estimate match the true part worths?
 cor(md.ests$Defined, md.ests$Counts)
 
+
 ### QUALTRICS DATA SETUP
 #
 # this section converts the data above to a Qualtrics-formatted CSV
+# this code might be useful for you if:
+#   1. you have MaxDiff data from Qualtrics whose headers are messed up due to editing
+#   2. you want to create Qualtrics-like data for some other reason (such as a demo, like here)
+# note that it is purely experimental
 #
+
+
 # make Qualtrics header rows for CSV data set
 #
 # first row:  ITEM NAMES

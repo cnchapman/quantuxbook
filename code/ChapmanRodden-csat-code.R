@@ -41,11 +41,19 @@
 
 
 # Load the CSat data
-# adjust the folder location for your system, wherever you put the CSV
-folder    <- "~/Downloads/"  # <======= adjust for your system
 
-# now read the data file from that folder
-csat.data <- read.csv(file=paste0(folder, "csat-data.csv"))
+# OPTION 1: Direct Download
+csat.data <- read.csv("https://quantuxbook.com/data/csat-data.csv")
+
+# OPTION 2: Load from already downloaded CSV
+# adjust the folder location for your system, wherever you put the CSV
+if (FALSE) {
+  folder    <- "~/Downloads/"  # <======= adjust for your system
+  # now read the data file from that folder
+  csat.data <- read.csv(file=paste0(folder, "csat-data.csv"))
+}
+
+# After loading, check the data
 str(csat.data)
 
 # set data types
