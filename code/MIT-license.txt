@@ -1,5 +1,5 @@
 MIT LICENSE
-for R code files from Chapman & Rodden, The Definitive Guide to Quantitative User Experience Research
+for R code files from Chapman & Rodden, Quantitative User Experience Research
 
 Copyright (c) 2022, Chris Chapman and Kerry Rodden
 

@@ -1,5 +1,5 @@
 #################################################################
-# Code for: The Definitive Guide to Quantitative User Experience Research
+# Code for: Quantitative User Experience Research
 # Chapter 8 -- Customer Satisfaction Surveys
 #
 # Authors:  Chris Chapman               Kerry  Rodden
@@ -36,7 +36,7 @@
 #################################################################
 # BRIEF HOW TO USE
 # This file contains scripts used in Chapter 8 of Chapman & Rodden (2023),
-#   "The Definitive Guide to Quantitative User Experience Research", Apress.
+#   "Quantitative User Experience Research", Apress.
 #################################################################
 
 
