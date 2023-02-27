@@ -48,7 +48,7 @@ a:hover
 #header
 {
 	padding: 0em 1.5em 0em 1.5em;
-	height: 6em;
+	height: 6.25em;
 	width: 20em;
 	float: left;
 	position: relative;
@@ -82,7 +82,7 @@ a:hover
 
 #menu
 {
-	height: 9em;
+	height: 6.2em;
 	background: #fafafa url('images/a2.gif') top left repeat-x;
 	margin-left: 22em;
 	position: relative;
@@ -92,20 +92,20 @@ a:hover
 {
 	list-style: none;
 	position: absolute;
-	top: 6.3em;
-	margin-left: 1.5em;
+	top: 4.9em;
+	margin-left: 0em;
 }
 
 #menu li
 {
 	display: inline;
-	border-left: dotted 1px #848484;
+	border-left: none 1px #848484;
 	padding-left: 0.8em;
 }
 
 #menu li.first
 {
-	border-left: 0px;
+	border-left: none;
 	padding-left: 0em;
 }
 
