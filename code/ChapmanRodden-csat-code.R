@@ -2,11 +2,11 @@
 # Code for: Quantitative User Experience Research
 # Chapter 8 -- Customer Satisfaction Surveys
 #
-# Authors:  Chris Chapman               Kerry  Rodden
+# Authors:  Chris Chapman & Kerry Rodden
 #
-# Copyright (c) 2022, Chris Chapman & Kerry Rodden
+# Copyright (c) 2023, Chris Chapman & Kerry Rodden
 #
-# Last update: October 29, 2022
+# Last update: March 3, 2023
 # Version: 1.0
 #
 # Licensed under the MIT License (the "License");
@@ -37,6 +37,13 @@
 # BRIEF HOW TO USE
 # This file contains scripts used in Chapter 8 of Chapman & Rodden (2023),
 #   "Quantitative User Experience Research", Apress.
+#
+# We recommend readers to type the code from the book as that
+# accelerates learning. However, this file may be used instead;
+# just step through it section by section to match the book.
+#
+# Note that there may be code sections and comments here that
+# do not appear in the book, with supplementary information.
 #################################################################
 
 

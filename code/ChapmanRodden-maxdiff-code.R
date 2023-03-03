@@ -4,9 +4,9 @@
 #
 # Authors:  Chris Chapman & Kerry Rodden
 #
-# Copyright (c) 2022, Chris Chapman & Kerry Rodden
+# Copyright (c) 2023, Chris Chapman & Kerry Rodden
 #
-# Last update: October 29, 2022
+# Last update: March 3, 2023
 # Version: 1.0
 #
 # Licensed under the MIT License (the "License");
@@ -37,6 +37,13 @@
 # BRIEF HOW TO USE
 # This file contains scripts used in Chapter 10 of Chapman & Rodden (2023),
 #   "Quantitative User Experience Research", Apress.
+#
+# We recommend readers to type the code from the book as that
+# accelerates learning. However, this file may be used instead;
+# just step through it section by section to match the book.
+#
+# Note that there may be code sections and comments here that
+# do not appear in the book, with supplementary information.
 #################################################################
 
 
@@ -114,6 +121,14 @@ round(100 * exp(colMeans(pizza.util)) / sum(exp(colMeans(pizza.util))))
 
 ### EXAMPLE TWO: SIMULATED INFORMATION USAGE DATA
 
+# General Note & Warning:
+# Qualtrics formats are likely to change over time and this code may need updating,
+# which is unfortunately outside the scope of the book.
+# This code works with data formats used at the time of publication but
+# may be expected to need adaptation over time. Be sure to test results
+# for consistency as noted in the text!
+
+
 # set up structure by parsing and interpreting the Qualtrics CSV
 library(choicetools)
 
@@ -144,7 +159,10 @@ head(md.define$md.block)
 # quick plot of the counts
 plot.md.counts(md.define)
 
-### START: this block not in the book
+
+###
+### START: this block is not in the book
+###
 # try the md.quicklogit() function for a quick check
 # note that one reference item is omitted in a traditional logit model
 # NOTE: this is omitted from the book, as it mostly duplicates the check from
@@ -152,11 +170,15 @@ plot.md.counts(md.define)
 md.define$md.model.logit <- md.quicklogit(md.define)
 # plot it
 md.plot.logit(md.define)
-### END: not in the book
+###
+### END: part that is not in the book
+###
+
 
 # estimate the HB model
 # note: slow. estimation takes about 4 minutes on Chris's laptop
-test.hb <- md.hb(md.define, mcmc.iters = 10000)       # estimation (note: set mcmc.iters appropriately)
+test.hb <- md.hb(md.define, mcmc.iters = 10000,
+                 mcmc.seed = 98101)                   # note: set mcmc.iters appropriately
 # save the estimates
 md.define$md.model.hb    <- test.hb$md.model          # save the results into our study object
 md.define$md.hb.betas    <- test.hb$md.hb.betas       # raw utilities by individual
@@ -199,6 +221,7 @@ plot.md.indiv(md.define) +                # distribution of individuals
   ylab("Information Use Cases")
 
 
+
 ######################
 # EXTRA CODE
 ######################
@@ -214,8 +237,8 @@ plot.md.indiv(md.define) +                # distribution of individuals
 # although it was used to create the "information seeking" data set
 # in the book.
 #
-# BEWARE that there are a few "magic numbers" here and there, due t
-# the author's laziness :)
+# BEWARE that there are a few "magic numbers" here and there. Read and
+# adjust those as needed.
 #
 
 # CREATE SIMULATED INFORMATION TASK DATA SET
@@ -239,7 +262,7 @@ N.cards <- 5
 ## create a design matrix
 #
 # We use the flipMaxDiff package to create a balanced design matrix
-# NOTE: the standard distribution gives errors as of August 2022
+# NOTE: the standard distribution gives errors as of writing time in 2022
 #    (that is flipMaxDiff from GDelin on GitHub)
 # instead we are using a forked build that works from pelishk@
 #
@@ -403,7 +426,11 @@ cor(md.ests$Defined, md.ests$Counts)
 # this code might be useful for you if:
 #   1. you have MaxDiff data from Qualtrics whose headers are messed up due to editing
 #   2. you want to create Qualtrics-like data for some other reason (such as a demo, like here)
-# note that it is purely experimental
+# note that it is purely experimental -- use at your OWN RISK and be sure you understand it
+# and test for your data set
+#
+# Qualtrics formats are likely to change over time and this code may need updating,
+# which is unfortunately outside the scope of the book.
 #
 
 
